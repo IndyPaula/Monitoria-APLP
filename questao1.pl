@@ -1,17 +1,20 @@
-eVogal(_):- false.
-eVogal(a).
-eVogal(e).
-eVogal(i).
-eVogal(o).
-eVogal(u).
+ehVogal(_):- false.
+ehVogal(a).
+ehVogal(e).
+ehVogal(i).
+ehVogal(o).
+ehVogal(u).
 
-tresVogais(0, []).
-tresVogais(X, [Y|P]):- eVogal(Y), X is (X1 + 1), tresVogais(X1, P).
-tresVogais(X, [_|P]):- tresVogais(X, P).
+contaVogais(0, []).
+contaVogais(Quant, [X|L]):- ehVogal(X), contaVogais(Quant1, L), Quant is (Quant1 + 1).
+contaVogais(Quant, [_|L]):- contaVogais(Quant, L).
 
+ehPalavraX(_):- false.
+ehPalavraX(Palavra):- contaVogais(3, Palavra). 
 
-
+:- initialization(main).
 main:-
-read(Palavra), 
-tresVogais(X, Palavra), 
-write(X), nl, halt(0).
+	read(Palavra), nl,
+	contaVogais(Quant, Palavra),
+	write(Quant),nl,
+	halt(0).
